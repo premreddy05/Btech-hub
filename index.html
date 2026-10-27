@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B.Tech Hub: notes, DSA practice, AI/ML projects and placement prep</title>
+<meta name="description" content="A free study hub for B.Tech students with curated notes, DSA practice, AI/ML project ideas and internship resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f7fb;--surface:#ffffff;--ink:#0f172a;--muted:#55607a;--line:#dde3ef;
+  --accent:#1d4ed8;--accent-ink:#ffffff;--tint:#e8efff;--ok:#15803d;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0a0f1f;--surface:#111a31;--ink:#e8edf9;--muted:#9aa6c4;--line:#222d4d;--accent:#7aa2ff;--accent-ink:#0a0f1f;--tint:#17254a;--ok:#4ade80}
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:var(--body);background:var(--bg);color:var(--ink);line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:var(--accent-ink);padding:8px 14px;border-radius:8px;z-index:50}
+.skip:focus{left:8px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* header */
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:20px;height:64px}
+.brand{font-family:var(--display);font-weight:800;font-size:1.25rem;color:var(--ink);text-decoration:none;letter-spacing:-.01em;white-space:nowrap}
+.brand b{color:var(--accent)}
+nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{color:var(--muted);text-decoration:none;font-weight:500;font-size:.95rem;padding:8px 12px;border-radius:8px;white-space:nowrap}
+nav a:hover{color:var(--ink);background:var(--tint)}
+
+/* hero */
+.hero{padding:72px 0 64px}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(2.4rem,5.6vw,4rem);line-height:1.04;letter-spacing:-.03em;margin-bottom:20px}
+.lede{font-size:1.15rem;color:var(--muted);max-width:52ch;margin-bottom:30px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;font-weight:600;font-size:1rem;padding:13px 24px;border-radius:10px;text-decoration:none;border:2px solid var(--accent);background:var(--accent);color:var(--accent-ink);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.alt{background:transparent;color:var(--accent)}
+
+/* weekly planner */
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:0 20px 50px -28px rgba(15,23,42,.35)}
+.plan h2{font-family:var(--display);font-size:1.25rem;margin-bottom:4px}
+.plan p{color:var(--muted);font-size:.9rem;margin-bottom:16px}
+.meter{height:8px;background:var(--tint);border-radius:99px;overflow:hidden;margin-bottom:18px}
+.meter i{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .35s}
+.plan label{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);cursor:pointer;font-size:.97rem}
+.plan input{margin-top:5px;width:18px;height:18px;accent-color:var(--accent);flex:none}
+.plan input:checked+span{color:var(--muted);text-decoration:line-through}
+.plan .count{margin-top:14px;font-size:.85rem;color:var(--muted)}
+
+/* sections */
+section{padding:64px 0}
+section+section{border-top:1px solid var(--line)}
+h2.t{font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,3.4vw,2.3rem);letter-spacing:-.02em;line-height:1.15;margin-bottom:10px}
+.intro{color:var(--muted);max-width:60ch;margin-bottom:30px}
+
+/* tools */
+.tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:18px}
+.search{flex:1 1 260px;max-width:380px;padding:12px 16px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{font:inherit;font-size:.9rem;font-weight:500;padding:8px 14px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+
+/* resource list */
+.list{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.row{display:grid;grid-template-columns:1.1fr 2fr auto;gap:20px;align-items:center;padding:16px 22px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row:hover{background:var(--tint)}
+.row h3{font-size:1rem;font-weight:600}
+.row small{display:block;color:var(--muted);font-size:.82rem;font-weight:400}
+.row p{color:var(--muted);font-size:.95rem}
+.row a{font-weight:600;font-size:.95rem;white-space:nowrap}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+
+/* projects */
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.col{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px}
+.col h3{font-family:var(--display);font-size:1.2rem;margin-bottom:4px}
+.col .sub{color:var(--muted);font-size:.88rem;margin-bottom:14px}
+.col ul{list-style:none}
+.col li{padding:12px 0;border-top:1px solid var(--line)}
+.col li b{display:block;font-weight:600}
+.col li span{color:var(--muted);font-size:.9rem}
+.tools-line{margin-top:22px;color:var(--muted);font-size:.95rem}
+
+/* roadmap */
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;counter-reset:y}
+.steps li{padding:24px;border-left:1px solid var(--line);counter-increment:y}
+.steps li:first-child{border-left:0}
+.steps li::before{content:"Year " counter(y);display:block;font-family:var(--display);font-weight:800;color:var(--accent);font-size:1.15rem;margin-bottom:8px}
+.steps p{color:var(--muted);font-size:.95rem}
+
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:.93rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
+footer a{margin-right:16px}
+.top{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;border:0;background:var(--accent);color:var(--accent-ink);font-size:1.2rem;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s}
+.top.show{opacity:1;pointer-events:auto}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;gap:36px}
+  .cols{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .steps li:nth-child(3){border-left:0}
+  .steps li:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 18px}
+  .hero{padding:44px 0 40px}
+  section{padding:48px 0}
+  .row{grid-template-columns:1fr;gap:6px;padding:16px 18px}
+  .steps{grid-template-columns:1fr}
+  .steps li{border-left:0;border-top:1px solid var(--line)}
+  .steps li:first-child{border-top:0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ===== Study theme: notebook, graph paper and dot-grid backgrounds ===== */
+:root{
+  --ruled:rgba(29,78,216,.10);--margin:rgba(220,38,38,.35);
+  --grid:rgba(29,78,216,.07);--grid-bold:rgba(29,78,216,.14);
+  --dot:rgba(29,78,216,.22);--hl:rgba(250,204,21,.45);--doodle:.13;
+}
+@media (prefers-color-scheme:dark){
+  :root{--ruled:rgba(122,162,255,.10);--margin:rgba(248,113,113,.35);--grid:rgba(122,162,255,.08);--grid-bold:rgba(122,162,255,.15);--dot:rgba(122,162,255,.25);--hl:rgba(250,204,21,.22);--doodle:.18}
+}
+body{background-color:var(--bg);background-image:repeating-linear-gradient(to bottom,transparent 0 31px,var(--ruled) 31px 32px)}
+section{position:relative;background-color:transparent}
+section>.wrap{position:relative;z-index:1}
+
+/* hero: graph paper with study doodles */
+.hero{position:relative;overflow:hidden;background-color:var(--bg);
+  background-image:
+    linear-gradient(var(--grid-bold) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-bold) 1px,transparent 1px),
+    linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:120px 120px,120px 120px,24px 24px,24px 24px;
+  border-bottom:1px solid var(--line)}
+.hero::before{content:"";position:absolute;inset:0;opacity:var(--doodle);pointer-events:none;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='560' height='380' viewBox='0 0 560 380' fill='none' stroke='%231d4ed8' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' font-family='Georgia,serif' font-size='30'><text x='24' y='60' fill='%231d4ed8' stroke='none'>E = mc²</text><text x='330' y='44' fill='%231d4ed8' stroke='none' font-family='monospace'>{ code }</text><text x='40' y='200' fill='%231d4ed8' stroke='none'>∑ n² = n(n+1)(2n+1)/6</text><text x='320' y='170' fill='%231d4ed8' stroke='none' font-family='monospace'>O(n log n)</text><text x='430' y='260' fill='%231d4ed8' stroke='none'>π ≈ 3.14</text><text x='60' y='320' fill='%231d4ed8' stroke='none' font-family='monospace'>while(learn) grow++;</text><path d='M250 90 l30 -30 l16 16 l-30 30 l-20 4 z'/><path d='M486 90 a22 22 0 1 1 -14 20 v14 h28 v-14'/><path d='M440 330 q20 -26 40 0 t40 0'/><circle cx='300' cy='290' r='20'/><path d='M300 270 v40 M280 290 h40'/></svg>") 0 0/560px 380px repeat}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:90px;pointer-events:none;background:linear-gradient(transparent,var(--bg))}
+.hero .wrap{position:relative;z-index:1}
+
+/* weekly plan as a spiral notepad with tape */
+.plan{position:relative;padding-top:44px;transform:rotate(1.2deg);
+  background-image:repeating-linear-gradient(to bottom,transparent 0 35px,var(--ruled) 35px 36px)}
+.plan::before{content:"";position:absolute;top:10px;left:18px;right:18px;height:14px;
+  background:radial-gradient(circle at 9px 7px,var(--ink) 0 3.5px,transparent 4px) 0 0/28px 14px repeat-x;opacity:.55}
+.plan::after{content:"";position:absolute;top:-12px;right:36px;width:84px;height:26px;transform:rotate(5deg);
+  background:var(--hl);border:1px solid rgba(0,0,0,.05)}
+.plan label{background:color-mix(in srgb,var(--surface) 72%,transparent)}
+
+/* section headings as highlighter marks */
+h2.t{display:block;width:fit-content;max-width:100%;background:linear-gradient(transparent 62%,var(--hl) 62%);padding:0 8px;margin-left:-8px}
+
+/* notes and internships: ruled paper with a margin line */
+#notes,#careers{background-color:transparent}
+#notes::before,#careers::before{content:"";position:absolute;top:0;bottom:0;left:max(8px,calc(50% - 552px));width:2px;background:var(--margin);pointer-events:none}
+#notes .intro,#careers .intro{background:var(--bg)}
+
+/* DSA and roadmap: dot-grid journal page */
+#dsa,#roadmap{background-color:var(--bg);background-image:radial-gradient(var(--dot) 1.3px,transparent 1.6px);background-size:26px 26px}
+
+/* projects: graph paper */
+#projects{background-color:var(--bg);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px}
+.col{position:relative;padding-top:30px}
+.col::before{content:"";position:absolute;top:-10px;left:50%;width:70px;height:22px;margin-left:-35px;background:var(--hl);transform:rotate(-3deg)}
+.col:nth-child(2)::before{transform:rotate(2deg)}
+.col:nth-child(3)::before{transform:rotate(-1deg)}
+.intro{max-width:60ch}
+
+/* footer as the back cover of a notebook */
+footer{background:var(--surface);border-top:3px double var(--line)}
+@media (max-width:640px){.plan{transform:none}.hero::before{opacity:calc(var(--doodle) * .6)}#notes::before,#careers::before{left:8px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top">B.Tech<b>Hub</b></a>
+    <nav aria-label="Main">
+      <a href="#notes">Notes</a>
+      <a href="#dsa">DSA</a>
+      <a href="#projects">AI/ML projects</a>
+      <a href="#careers">Internships</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <h1>Notes, practice and placement prep for B.Tech students.</h1>
+      <p class="lede">A curated set of free resources that covers your core subjects, daily coding practice, AI/ML projects and internship applications, without the hundred open tabs.</p>
+      <div class="cta">
+        <a class="btn" href="#notes">Browse notes</a>
+        <a class="btn alt" href="#projects">See project ideas</a>
+      </div>
+    </div>
+    <aside class="plan" aria-labelledby="planT">
+      <h2 id="planT">This week’s study plan</h2>
+      <p>Tick items as you finish them. Your progress is saved on this device.</p>
+      <div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="meter"><i id="bar"></i></div>
+      <div id="tasks"></div>
+      <div class="count" id="count"></div>
+    </aside>
+  </div>
+</div>
+
+<section id="notes">
+  <div class="wrap">
+    <h2 class="t">Subject notes and courses</h2>
+    <p class="intro">Free material from universities and trusted platforms. Search by subject or filter by area.</p>
+    <div class="tools">
+      <input class="search" id="q" type="search" placeholder="Search subjects, for example DBMS or probability" aria-label="Search subjects">
+      <div class="chips" id="chips"></div>
+    </div>
+    <div class="list" id="notesList" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="dsa">
+  <div class="wrap">
+    <h2 class="t">DSA and coding practice</h2>
+    <p class="intro">Pick one platform to practise on and one to compete on. Consistency beats variety.</p>
+    <div class="list" id="dsaList"></div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2 class="t">AI/ML project ideas</h2>
+    <p class="intro">Build each project end to end, push it to GitHub and write a clear README. Two finished projects beat ten half-done ones.</p>
+    <div class="cols" id="cols"></div>
+    <p class="tools-line">Datasets and tools: <a href="https://www.kaggle.com/datasets" target="_blank" rel="noopener">Kaggle</a>, <a href="https://huggingface.co/" target="_blank" rel="noopener">Hugging Face</a>, <a href="https://colab.research.google.com/" target="_blank" rel="noopener">Google Colab</a> and <a href="https://scikit-learn.org/" target="_blank" rel="noopener">scikit-learn</a>.</p>
+  </div>
+</section>
+
+<section id="careers">
+  <div class="wrap">
+    <h2 class="t">Internships and placements</h2>
+    <p class="intro">Where to apply, and what to practise before the interview.</p>
+    <div class="list" id="careerList"></div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <h2 class="t">Four-year roadmap</h2>
+    <p class="intro">A simple plan you can adapt to your college and branch.</p>
+    <ol class="steps">
+      <li><p>Learn C or Python, build a base in maths, and get comfortable with Git and GitHub.</p></li>
+      <li><p>Practise DSA daily, study core CS subjects, finish two small projects and join a tech club.</p></li>
+      <li><p>Land an internship, build one strong AI/ML or web project, enter contests and prepare your resume.</p></li>
+      <li><p>Take mock interviews, practise aptitude, revise core subjects and apply widely.</p></li>
+    </ol>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <strong>B.Tech Hub</strong><br>
+      Built for students. Resource links open on external sites.
+    </div>
+    <div>
+      <a href="mailto:you@example.com">Email</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      <div id="yr" style="margin-top:6px"></div>
+    </div>
+  </div>
+</footer>
+<button class="top" id="top2" aria-label="Back to top">↑</button>
+
+<script>
+var NOTES=[
+["Data Structures and Algorithms","Core CS","GeeksforGeeks","Visual explanations with practice sets.","https://www.geeksforgeeks.org/dsa/dsa-tutorial-learn-data-structures-and-algorithms/"],
+["Operating Systems","Core CS","NPTEL","Processes, scheduling, memory and deadlocks.","https://nptel.ac.in/"],
+["DBMS and SQL","Core CS","W3Schools","ER models, normalization and queries.","https://www.w3schools.com/sql/"],
+["Computer Networks","Core CS","GeeksforGeeks","OSI and TCP/IP, routing and transport layer.","https://www.geeksforgeeks.org/computer-networks/"],
+["University lectures","Core CS","MIT OpenCourseWare","Full free courses from a top university.","https://ocw.mit.edu/"],
+["Linear Algebra","Maths","MIT 18.06","Vectors, matrices and eigenvalues, essential for ML.","https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"],
+["Probability and Statistics","Maths","Khan Academy","Concept-first lessons with exercises.","https://www.khanacademy.org/math/statistics-probability"],
+["Calculus and Discrete Maths","Maths","NPTEL","Lecture series by IIT faculty.","https://nptel.ac.in/"],
+["Machine Learning","AI/ML","Coursera","A beginner-friendly ML specialization.","https://www.coursera.org/specializations/machine-learning-introduction"],
+["Practical Deep Learning","AI/ML","fast.ai","A code-first approach to deep learning.","https://course.fast.ai/"],
+["GATE CSE notes","Exams","GeeksforGeeks","Topic-wise notes and previous-year questions.","https://www.geeksforgeeks.org/gate/gate-cs-notes-gq/"]
+];
+var DSA=[
+["LeetCode","Interview-style problems","Best for placements. Start with Easy, then move to Medium.","https://leetcode.com/problemset/"],
+["NeetCode 150","Curated roadmap","A focused problem list with video solutions.","https://neetcode.io/roadmap"],
+["Codeforces","Rated contests","Competitive programming that sharpens speed and thinking.","https://codeforces.com/"],
+["CodeChef","Monthly contests","Friendly for beginners, with Indian-language editorials.","https://www.codechef.com/"],
+["GeeksforGeeks Practice","Topic-wise sets","Company-tagged problems sorted by data structure.","https://www.geeksforgeeks.org/explore"],
+["HackerRank","Skills and prep kits","Language practice and interview preparation kits.","https://www.hackerrank.com/"]
+];
+var CAREER=[
+["Internshala","Apply","Large catalogue of internships and trainings in India.","https://internshala.com/"],
+["LinkedIn Jobs","Apply","Set alerts for “intern” together with your skills.","https://www.linkedin.com/jobs/"],
+["Unstop","Apply","Hackathons, competitions and hiring challenges.","https://unstop.com/"],
+["Wellfound","Apply","Startup internships and early-career roles.","https://wellfound.com/"],
+["IndiaBIX","Prepare","Aptitude, reasoning and verbal practice.","https://www.indiabix.com/"],
+["Interview corner","Prepare","Core CS questions on OS, DBMS, networks and OOP.","https://www.geeksforgeeks.org/interview-corner/"],
+["Overleaf CV templates","Prepare","Clean, ATS-friendly one-page resume templates.","https://www.overleaf.com/latex/templates/tagged/cv"],
+["Google Summer of Code","Build","Open-source programs that strengthen your profile.","https://summerofcode.withgoogle.com/"]
+];
+var PROJ=[
+["Beginner","Start with clean data and simple models.",[["House price predictor","Regression, feature engineering, simple web UI"],["Spam classifier","TF-IDF with Naive Bayes"],["Customer segmentation","K-Means with visualised clusters"]]],
+["Intermediate","Work with images, text and time.",[["Crop disease detection","CNN on leaf images, deployed as an app"],["Resume screener","NLP to match resumes with job descriptions"],["Sales forecasting","ARIMA compared with LSTM"]]],
+["Advanced","Ship something people can use.",[["RAG chatbot for class notes","Embeddings and vector search over your PDFs"],["Attendance by face recognition","OpenCV, deep learning and a live dashboard"]]]
+];
+var PLAN=["Solve 5 DSA problems","Revise one core subject chapter","Watch one ML lecture","Work 3 hours on your project","Apply to 2 internships"];
+
+function row(t,s,p,u,l){return '<div class="row"><div><h3>'+t+'<small>'+s+'</small></h3></div><p>'+p+'</p><a href="'+u+'" target="_blank" rel="noopener">'+(l||"Open")+'</a></div>'}
+
+/* notes */
+var cats=["All"].concat(NOTES.map(function(n){return n[1]}).filter(function(c,i,a){return a.indexOf(c)===i}));
+var cat="All",term="";
+var chips=document.getElementById("chips"),nl=document.getElementById("notesList");
+cats.forEach(function(c){var b=document.createElement("button");b.textContent=c;b.setAttribute("aria-pressed",c==="All");
+  b.onclick=function(){cat=c;[].forEach.call(chips.children,function(x){x.setAttribute("aria-pressed",x===b)});draw()};chips.appendChild(b)});
+function draw(){
+  var r=NOTES.filter(function(n){return (cat==="All"||n[1]===cat)&&(n.join(" ").toLowerCase().indexOf(term)>-1)});
+  nl.innerHTML=r.length?r.map(function(n){return row(n[0],n[2],n[3],n[4],"Open course")}).join(""):'<div class="empty">No subjects match your search. Try a different keyword.</div>';
+}
+document.getElementById("q").addEventListener("input",function(e){term=e.target.value.toLowerCase().trim();draw()});
+draw();
+
+document.getElementById("dsaList").innerHTML=DSA.map(function(d){return row(d[0],d[1],d[2],d[3],"Start practising")}).join("");
+document.getElementById("careerList").innerHTML=CAREER.map(function(d){return row(d[0],d[1],d[2],d[3])}).join("");
+document.getElementById("cols").innerHTML=PROJ.map(function(p){
+  return '<div class="col"><h3>'+p[0]+'</h3><div class="sub">'+p[1]+'</div><ul>'+p[2].map(function(i){return '<li><b>'+i[0]+'</b><span>'+i[1]+'</span></li>'}).join("")+'</ul></div>'}).join("");
+
+/* weekly plan */
+var done={};try{done=JSON.parse(localStorage.getItem("btechhub-plan")||"{}")}catch(e){}
+var tk=document.getElementById("tasks");
+PLAN.forEach(function(t,i){
+  var l=document.createElement("label");l.innerHTML='<input type="checkbox"><span>'+t+'</span>';
+  var c=l.firstChild;c.checked=!!done[i];
+  c.onchange=function(){done[i]=c.checked;try{localStorage.setItem("btechhub-plan",JSON.stringify(done))}catch(e){}prog()};
+  tk.appendChild(l)});
+function prog(){
+  var n=PLAN.filter(function(_,i){return done[i]}).length,p=Math.round(n/PLAN.length*100);
+  document.getElementById("bar").style.width=p+"%";
+  document.getElementById("meter").setAttribute("aria-valuenow",p);
+  document.getElementById("count").textContent=n+" of "+PLAN.length+" done"+(n===PLAN.length?". Great week!":"");
+}
+prog();
+
+/* misc */
+document.getElementById("yr").textContent="© "+new Date().getFullYear()+" B.Tech Hub";
+var tb=document.getElementById("top2");
+window.addEventListener("scroll",function(){tb.classList.toggle("show",window.scrollY>600)});
+tb.onclick=function(){window.scrollTo({top:0})};
+</script>
+</body>
+</html>
